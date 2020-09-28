@@ -1,7 +1,6 @@
 //Déclaration de variables constantes
 #define PIN_LED_STRIP_01 9// pin arduino où est raccordé la première led strip = pin 9
 #define PIN_LED_STRIP_02 10// pin arduino où est raccordé la deuxième led strip = pin 10
-//#define FADESPEED 7 // Vitesse
 
 // déclaration variables
 int fondu01 = 0;
