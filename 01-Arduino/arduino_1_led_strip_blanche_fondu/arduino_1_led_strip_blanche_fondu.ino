@@ -3,7 +3,8 @@
 
 // déclaration variables
 int fondu01 = 0;
-int vitesseFondu = 50;
+int vitesseFondu = 10;
+int fonduMontant01;
 
 void setup() {
   //déclaration de la pin numérique 9 en tant que sortie
@@ -12,12 +13,15 @@ void setup() {
 
 
 void loop() {
-  //fondu lumineux de la led strip#1 branchée sur le pin 9 de l'arduino
-  if (fondu01 < 255) {
-    fondu01 = fondu01 + 1;
-    analogWrite(PIN_LED_STRIP_01, fondu01);
-  } else {
-    fondu01 = 0;
+  //fondu lumineux de la led strip #1 branchée sur le pin 9 de l'arduino
+  if ( fondu01 == 255) {
+    fonduMontant01 = -1;
   }
+  if (fondu01 == 0) {
+    fonduMontant01 = 1;
+  }
+  fondu01 = fondu01 + fonduMontant01;
+
+  analogWrite(PIN_LED_STRIP_01, fondu01);
   delay(vitesseFondu);
 }
