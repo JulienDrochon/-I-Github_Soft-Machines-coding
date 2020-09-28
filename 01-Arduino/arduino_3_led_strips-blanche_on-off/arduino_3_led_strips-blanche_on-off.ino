@@ -2,7 +2,6 @@
 #define PIN_LED_STRIP_01 9// pin arduino où est raccordé la première led strip = pin 9
 #define PIN_LED_STRIP_02 10// pin arduino où est raccordé la deuxième led strip = pin 10
 #define PIN_LED_STRIP_03 11// pin arduino où est raccordé la deuxième led strip = pin 11
-//#define FADESPEED 7 // Vitesse
 
 // déclaration variables
 int vitesse = 500; // 1000 millisecondes = 1 seconde
