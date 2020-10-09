@@ -1,11 +1,8 @@
-// Initialisation des lignes 4 à 9 en sortie
+// Initialisation des pins 8, 9, 10 comme sorties
 void setup () {
-  pinMode (4, OUTPUT) ;
-  pinMode (5, OUTPUT) ;
-  pinMode (6, OUTPUT) ;
-  pinMode (7, OUTPUT) ;
   pinMode (8, OUTPUT) ;
   pinMode (9, OUTPUT) ;
+  pinMode (10, OUTPUT) ;
 }
  
 // Fonction loop
