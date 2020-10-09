@@ -9,8 +9,8 @@ void setup() {
 
 // la fonction loop() est une fonction qui tourne en boucle éternellement une fois que le setup s'est exécuté
 void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
+  digitalWrite(pinLed, HIGH);   // allumer la led. HIGH signifie qu'on lui donne du courant
+  delay(1000);                       // attente d'une seconde
+  digitalWrite(pinLed, LOW);    // éteindre la Led en coupant le courant
+  delay(1000);                       // attente d'une seconde
 }
