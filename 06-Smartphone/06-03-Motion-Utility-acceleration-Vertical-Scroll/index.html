@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Smartphone Motion Utility | Image scrolling</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="lib/socket.io.slim.js"></script>
+  </head>
+  <body>
+    <img src="assets/ruper-mulot00.jpg" alt="" />
+
+    <script src="lib/dataFromSmartphone.js"></script>
+    <script>
+      // let scrolling = 0;
+      // document.body.addEventListener("keydown", function (event) {
+      //   scrolling = scrolling + 105;
+      //   window.scrollTo({
+      //     top: scrolling,
+      //     left: 0,
+      //     behavior: "smooth",
+      //   });
+
+      //   console.log("ttt");
+      // });
+      let scrolling = 0;
+
+      // ici se passe l'interprétation des données d'orientation du téléphone
+      setInterval(function () {
+        //Si la valeur d'acceleration y du smartphone est positive, on modifie la valeur de la variable scrolling
+        if (dataFromSmartphone[7] > 2) {
+          scrolling = scrolling + 50;
+        }
+        //Si la valeur d'acceleration y du smartphone est positive, on modifie la valeur de la variable scrolling
+        if (dataFromSmartphone[7] < -2) {
+          scrolling = scrolling - 50;
+        }
+        //on actualise le scroll vertical
+        window.scrollTo({
+          top: scrolling,
+          left: 0,
+          behavior: "smooth",
+        });
+      }, 1000); // toutes les 30 millisecondes, on rafraichit les valeurs des variables
+    </script>
+  </body>
+</html>
