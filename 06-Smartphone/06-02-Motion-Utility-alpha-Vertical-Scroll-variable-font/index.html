@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   
-    <script src="js/socket.io.slim.js"></script>
+    <script src="lib/socket.io.slim.js"></script>
     
     <link rel="stylesheet" href="css/style.css" />
 
@@ -14,12 +14,14 @@
   <body>
     <did id='variableFont'>Hello World</div>
   </body>
-<script src="js/library.js"></script>
+<script src="lib/dataFromSmartphone.js"></script>
 
   <script>
+    //Dans cette fonction, 
    setInterval(function () {
+     // je change la propriété css font-variation-settings 'wght' de la police de caractère affectée à l'id variableFont
     document.getElementById('variableFont').style.fontVariationSettings =
-      "'wght' " + parseInt(map_range(variableOrientation01, 0, 359, 10, 160));
-  }, 50);
+      "'wght' " + parseInt(mapData(dataFromSmartphone[0], 0, 359, 10, 160)); 
+  }, 10); // toutes les 10 millisecondes je mets à jour les données reçues du téléphone
   </script>
 </html>
