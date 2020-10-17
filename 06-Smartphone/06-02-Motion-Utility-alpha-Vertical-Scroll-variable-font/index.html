@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+    <script src="js/socket.io.slim.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Variable Font</title>
+  </head>
+  <body>
+    <did id='variableFont'>Hello World</div>
+  </body>
+<script src="js/library.js"></script>
+
+  <script>
+   setInterval(function () {
+    document.getElementById('variableFont').style.fontVariationSettings =
+      "'wght' " + parseInt(map_range(variableOrientation01, 0, 359, 10, 160));
+  }, 50);
+  </script>
+</html>

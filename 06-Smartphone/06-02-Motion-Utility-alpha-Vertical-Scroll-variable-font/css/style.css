@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'protakt';
+  src: url('fonts/HalvarFlex.woff2') format('woff2');
+}
+
+body {
+  background: #000;
+  font-family: 'protakt';
+  color: white;
+  font-size: 20em;
+  /* font-variation-settings: 'wght' 850; */
+}

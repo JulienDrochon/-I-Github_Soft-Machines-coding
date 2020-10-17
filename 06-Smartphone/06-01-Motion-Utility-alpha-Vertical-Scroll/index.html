@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Image scrolling</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/socket.io.slim.js"></script>
+  </head>
+  <body>
+    <img src="assets/ruper-mulot01.jpg" alt="" />
+    <script src="js/library.js"></script>
+    <script>
+      var oldVariableOrientation01, newVariableOrientation01, delta;
+
+      setInterval(function () {
+        // --- dans la console --- //
+        // afficher dans la console du navigateur les valeurs des variables
+        console.log("variable 1 : " + variableOrientation02);
+        // console.log("old variable 1 : " + oldVariableOrientation01);
+        newVariableOrientation01 = variableOrientation01; // je stocke la valeur de la variable dans une autre variable avant de l'utiliser
+        delta = oldVariableOrientation01 - newVariableOrientation01; // je fais la difference de la valeur de la variable avant et après utilisation. cela permet de déduire le sens de rotation
+        if (variableOrientation02 > 0) {
+          window.scrollBy(0, -5);
+        } else if (variableOrientation02 < 0) {
+          window.scrollBy(0, 5);
+        }
+        oldVariableOrientation01 = variableOrientation01; // je stocke la valeur de la variable dans une autre variable après l'avoir utilisée
+      }, 20); // toutes les 50 millisecondes, on rafraichit les valeurs des variables
+    </script>
+  </body>
+</html>
