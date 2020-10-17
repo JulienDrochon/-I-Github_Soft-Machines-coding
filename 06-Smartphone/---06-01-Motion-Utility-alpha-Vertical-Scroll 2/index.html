@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Smartphone Motion Utility | Image scrolling</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="lib/socket.io.min.js"></script>
+  </head>
+  <body>
+    <img src="assets/ruper-mulot01.jpg" alt="" />
+
+    <script src="lib/dataFromSmartphone.js"></script>
+    <script>
+      // ici se passe l'interprétation des données d'orientation du téléphone
+      setInterval(function () {
+        //Si la valeur d'orientation beta du smartphone est positive, le navigateur scrolle vers le haut
+        if (dataFromSmartphone[1] > 0) {
+          window.scrollBy(0, -5);
+        }
+        //Si la valeur d'orientation beta du smartphone est positive, le navigateur scrolle vers le haut
+        if (dataFromSmartphone[1] < 0) {
+          window.scrollBy(0, 5);
+        }
+      }, 10); // toutes les 10 millisecondes, on rafraichit les valeurs des variables
+    </script>
+  </body>
+</html>
