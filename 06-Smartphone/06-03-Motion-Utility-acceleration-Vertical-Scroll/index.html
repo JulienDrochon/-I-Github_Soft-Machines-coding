@@ -13,27 +13,16 @@
 
     <script src="lib/dataFromSmartphone.js"></script>
     <script>
-      // let scrolling = 0;
-      // document.body.addEventListener("keydown", function (event) {
-      //   scrolling = scrolling + 105;
-      //   window.scrollTo({
-      //     top: scrolling,
-      //     left: 0,
-      //     behavior: "smooth",
-      //   });
-
-      //   console.log("ttt");
-      // });
       let scrolling = 0;
 
       // ici se passe l'interprétation des données d'orientation du téléphone
       setInterval(function () {
         //Si la valeur d'acceleration y du smartphone est positive, on modifie la valeur de la variable scrolling
-        if (dataFromSmartphone[7] > 2) {
+        if (deltaData[4] > 0) {
           scrolling = scrolling + 50;
         }
         //Si la valeur d'acceleration y du smartphone est positive, on modifie la valeur de la variable scrolling
-        if (dataFromSmartphone[7] < -2) {
+        if (deltaData[4] < 0) {
           scrolling = scrolling - 50;
         }
         //on actualise le scroll vertical
@@ -42,7 +31,7 @@
           left: 0,
           behavior: "smooth",
         });
-      }, 1000); // toutes les 30 millisecondes, on rafraichit les valeurs des variables
+      }, 250); // toutes les 30 millisecondes, on rafraichit les valeurs des variables
     </script>
   </body>
 </html>
