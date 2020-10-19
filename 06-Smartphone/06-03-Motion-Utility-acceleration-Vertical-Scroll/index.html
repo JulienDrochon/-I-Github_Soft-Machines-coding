@@ -18,11 +18,11 @@
       // ici se passe l'interprétation des données d'orientation du téléphone
       setInterval(function () {
         //Si la valeur d'acceleration y du smartphone est positive, on modifie la valeur de la variable scrolling
-        if (mouvement[4].upDown == -1) {
+        if (sensor[4].upDown == -1) {
           scrolling = scrolling + 100;
         }
         //Si la valeur d'acceleration y du smartphone est positive, on modifie la valeur de la variable scrolling
-        if (mouvement[4].upDown == 1) {
+        if (sensor[4].upDown == 1) {
           scrolling = scrolling - 50;
         }
         //on actualise le scroll vertical
@@ -31,7 +31,7 @@
           left: 0,
           behavior: "smooth",
         });
-      }, 50); // toutes les 30 millisecondes, on rafraichit les valeurs des variables
+      }, 50); // toutes les 50 millisecondes, on rafraichit les valeurs des variables
     </script>
   </body>
 </html>

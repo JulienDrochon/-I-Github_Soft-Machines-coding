@@ -21,7 +21,7 @@
    setInterval(function () {
      // je change la propriété css font-variation-settings 'wght' de la police de caractère affectée à l'id variableFont
     document.getElementById('variableFont').style.fontVariationSettings =
-      "'wght' " + parseInt(mapData(dataFromSmartphone[0], 0, 359, 10, 160)); 
+      "'wght' " + parseInt(mapData(dataSmartphone[0], 0, 359, 10, 160)); 
   }, 10); // toutes les 10 millisecondes je mets à jour les données reçues du téléphone
   </script>
 </html>
