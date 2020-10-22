@@ -2,17 +2,18 @@ var socket = io("http://localhost:9079/utility");
 var dataSmartphone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var deltaData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var storedDataSmartphone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var highVal = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var lowVal = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var sensor = [];
 var triggerMoving = 0;
 var lastFixedPositions = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var comparePositions = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var faceUp = ["Screen", "Back", "Right", "Left", "Top", "Bottom"];
+var listFaceUp = ["Screen", "Back", "Right", "Left", "Top", "Bottom"];
+var lastFaceUp = "";
+let currentFaceUp = "";
 
 for (var i = 0; i < 10; i++) {
   let item = {
     value: 0,
+    delta: 0,
     min: 0,
     max: 0,
     upDown: 0,
@@ -27,7 +28,7 @@ socket.on("connect", function () {
 // Data receiving
 socket.on("sendDataToDashboard", receivingData);
 function receivingData(data) {
-  if (data) {
+  if (data.data != undefined) {
     for (var i = 0; i < data.data.value.length; i++) {
       //Compute data
       dataSmartphone[i] = data.data.value[i];
@@ -56,10 +57,16 @@ function receivingData(data) {
     if (isSmartphoneMoving() == 0 && triggerMoving == 0) {
       triggerMoving = 1;
       smartphoneFace();
+
       for (var i = 0; i < 10; i++) {
-        comparePositions[i] = lastFixedPositions[i] - sensor[i].value;
-        console.log("compare : " + i + "  " + comparePositions[i]);
+        comparePositions[i] = sensor[i].value - lastFixedPositions[i];
+        // sensor = deltaFixedPosition;
+        lastFixedPositions[i] = sensor[i].value;
+        // sensor[i].delta = comparePositions[i];
+        // console.log("compare : " + i + "  " + comparePositions[i]);
       }
+      validate();
+      console.log(sensor);
     }
   }
 }
@@ -69,6 +76,7 @@ setInterval(function () {
   for (var i = 0; i < 10; i++) {
     let item = {
       value: dataSmartphone[i],
+      delta: comparePositions[i],
       min: 0,
       max: 0,
       upDown: 0,
@@ -89,9 +97,9 @@ function mapData(value, a, b, c, d) {
 function isSmartphoneMoving() {
   let isMoving;
   if (
-    Math.abs(deltaData[0]) > 20 ||
-    Math.abs(deltaData[1]) > 20 ||
-    Math.abs(deltaData[2]) > 20 ||
+    Math.abs(deltaData[0]) > 5 ||
+    Math.abs(deltaData[1]) > 5 ||
+    Math.abs(deltaData[2]) > 5 ||
     dataSmartphone[3] != 0 ||
     dataSmartphone[4] != 0 ||
     dataSmartphone[5] != 0
@@ -112,10 +120,11 @@ function isSmartphoneMoving() {
   return isMoving;
 }
 
-function storeFixedPositions() {}
-
 function smartphoneFace() {
-  let face = "";
+  if (currentFaceUp != undefined) {
+    lastFaceUp = currentFaceUp;
+  }
+
   // screen is up
   if (
     -2 < dataSmartphone[6] &&
@@ -125,8 +134,9 @@ function smartphoneFace() {
     7 < dataSmartphone[8] &&
     dataSmartphone[8] < 11
   ) {
-    face = faceUp[0];
-    console.log("face : " + faceUp[0]);
+    currentFaceUp = listFaceUp[0];
+    console.log("last currentFaceUp : " + lastFaceUp);
+    console.log("currentFaceUp : " + listFaceUp[0]);
   }
   // back is up
   if (
@@ -137,8 +147,9 @@ function smartphoneFace() {
     -12 < dataSmartphone[8] &&
     dataSmartphone[8] < -8
   ) {
-    face = faceUp[1];
-    console.log("face : " + faceUp[1]);
+    currentFaceUp = listFaceUp[1];
+    console.log("last currentFaceUp : " + lastFaceUp);
+    console.log("currentFaceUp : " + listFaceUp[1]);
   }
   // right is up ??
   if (
@@ -149,8 +160,9 @@ function smartphoneFace() {
     -2 < dataSmartphone[8] &&
     dataSmartphone[8] < 2
   ) {
-    face = faceUp[2];
-    console.log("face : " + faceUp[2]);
+    currentFaceUp = listFaceUp[2];
+    console.log("last currentFaceUp : " + lastFaceUp);
+    console.log("currentFaceUp : " + listFaceUp[2]);
   }
   // left is up ??
   if (
@@ -161,8 +173,9 @@ function smartphoneFace() {
     -2 < dataSmartphone[8] &&
     dataSmartphone[8] < 2
   ) {
-    face = faceUp[3];
-    console.log("face : " + faceUp[3]);
+    currentFaceUp = listFaceUp[3];
+    console.log("last currentFaceUp : " + lastFaceUp);
+    console.log("currentFaceUp : " + listFaceUp[3]);
   }
   // top is up
   if (
@@ -173,8 +186,9 @@ function smartphoneFace() {
     -2 < dataSmartphone[8] &&
     dataSmartphone[8] < 2
   ) {
-    face = faceUp[4];
-    console.log("face : " + faceUp[4]);
+    currentFaceUp = listFaceUp[4];
+    console.log("last currentFaceUp : " + lastFaceUp);
+    console.log("currentFaceUp : " + listFaceUp[4]);
   }
   // bottom is up
   if (
@@ -185,8 +199,30 @@ function smartphoneFace() {
     -2 < dataSmartphone[8] &&
     dataSmartphone[8] < 2
   ) {
-    face = faceUp[5];
-    console.log("face : " + faceUp[5]);
+    currentFaceUp = listFaceUp[5];
+    console.log("last currentFaceUp : " + lastFaceUp);
+    console.log("currentFaceUp : " + listFaceUp[5]);
   }
-  return face;
+  return currentFaceUp;
+}
+
+function compareFixedPositions() {}
+
+function validate() {
+  console.log("->  :  " + Math.abs(comparePositions[0]));
+  let val0, val1, val2;
+  val1 = Math.abs(comparePositions[0]);
+  val2 = Math.abs(comparePositions[1]);
+  val3 = Math.abs(comparePositions[2]);
+  if ((val1 + val2 + val3) / 3 >= 50) {
+    console.log("validate");
+  }
+  // if (
+  //   lastFaceUp == currentFaceUp &&
+  //   (Math.abs(deltaData[0]) + Math.abs(deltaData[1]) + Math.abs(deltaData[2])) *
+  //     0.3 >
+  //     5
+  // ) {
+  //   alert("validate");
+  // }
 }
