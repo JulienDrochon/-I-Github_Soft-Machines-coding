@@ -98,8 +98,8 @@ void setup(){
     while(1);
   }
   MPR121.setInterruptPin(MPR121_INT);
-  MPR121.setTouchThreshold(40);    // lower numbers make the board more sensitive
-  MPR121.setReleaseThreshold(20);  // make sure that the release threshold is always 
+  MPR121.setTouchThreshold(1);    // lower numbers make the board more sensitive // default value 40
+  MPR121.setReleaseThreshold(5);  // make sure that the release threshold is always // default value 40
                                    // lower than the touch threshold
 
   MPR121.updateAll();
