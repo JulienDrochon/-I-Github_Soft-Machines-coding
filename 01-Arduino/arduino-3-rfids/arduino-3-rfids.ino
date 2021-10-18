@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <RFID.h> // à télécharger pour installation ici : https://github.com/miguelbalboa/rfid
 
-// Déclaration des modules
+// Déclaration des modules RFID
 RFID monModuleRFID01(2, 9); // SDA, RST
 RFID monModuleRFID02(3, 9); // SDA, RST
 RFID monModuleRFID03(4, 9); // SDA, RST
